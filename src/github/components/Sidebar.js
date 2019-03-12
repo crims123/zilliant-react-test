@@ -1,7 +1,8 @@
 import React from 'react'
 import { Drawer, List, ListItem, Avatar, FontIcon } from 'react-md'
+import { connect } from 'react-redux'
 
-import { connect } from '../store'
+
 
 const Sidebar = ({ user }) => {
   console.log(user)
@@ -41,4 +42,10 @@ const Sidebar = ({ user }) => {
   )
 }
 
-export default connect(Sidebar)
+const mapStateToProps = ({ user })=>{
+  return {
+    user
+  }
+}
+
+export default connect(mapStateToProps, null)(Sidebar);

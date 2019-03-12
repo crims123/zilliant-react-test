@@ -1,7 +1,8 @@
 import React from 'react'
 import { Toolbar, Avatar, Button } from 'react-md'
+import { connect } from 'react-redux'
 
-import { connect } from '../store'
+import { onUpdateUser, onUpdateRepos } from '../actions/actionsCreators'
 
 const TopBar = ({ user, updateUser, updateRepos }) => {
   const updateAll = () => {
@@ -18,4 +19,21 @@ const TopBar = ({ user, updateUser, updateRepos }) => {
   )
 }
 
-export default connect(TopBar)
+const mapStateToProps = ({ user })=>{
+  return {
+    user
+  }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    updateUser() {
+      dispatch(onUpdateUser())
+    },
+    updateRepos() {
+      dispatch(onUpdateRepos())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopBar);
