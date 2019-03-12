@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import { CircularProgress } from 'react-md'
 import { connect } from 'react-redux'
 
-
 import RepoList from './RepoList'
 import RepoDetail from './RepoDetail'
-import { onUpdateRepos, onSelectRepo, onUnSelectRepo} from '../actions/actionsCreators'
+import { onUpdateRepos, onSelectRepo, onUnSelectRepo } from '../actions/actionsCreators'
 
 class Repos extends Component {
   componentDidMount() {
@@ -52,8 +51,8 @@ const mapDispatchToProps = (dispatch)=>{
     updateRepos() {
       dispatch(onUpdateRepos())
     },
-    selectRepo() {
-      dispatch(onSelectRepo())
+    selectRepo(id) {
+      dispatch(onSelectRepo(id))
     },
     unselectRepo() {
       dispatch(onUnSelectRepo())

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { CircularProgress, Snackbar } from 'react-md'
 import { connect } from 'react-redux'
 
-
 import TopBar from './TopBar'
 import Sidebar from './Sidebar'
 import { onDismissError, onUpdateUser } from '../actions/actionsCreators'

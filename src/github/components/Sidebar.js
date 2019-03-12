@@ -2,8 +2,6 @@ import React from 'react'
 import { Drawer, List, ListItem, Avatar, FontIcon } from 'react-md'
 import { connect } from 'react-redux'
 
-
-
 const Sidebar = ({ user }) => {
   console.log(user)
   return (
