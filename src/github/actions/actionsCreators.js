@@ -1,5 +1,5 @@
 import { getUser, getRepos } from '../requests';
-import { DISMISS_ERROR, SET_FETCHING_USER_STATE, FETCH_USER_SUCCESSFULLY, SET_ERROR_MESSAGE, SET_FETCHING_REPOS_STATE, FETCH_REPOS_SUCCESSFULLY } from "./types";
+import { DISMISS_ERROR, SET_FETCHING_USER_STATE, FETCH_USER_SUCCESSFULLY, SET_ERROR_MESSAGE, SET_FETCHING_REPOS_STATE, FETCH_REPOS_SUCCESSFULLY, SET_SELECTED_REPO } from "./types";
 
 const onDismissError = () => ({
     type: DISMISS_ERROR
@@ -28,6 +28,11 @@ const onFetchReposSuccessfully = (data) => ({
 const onSetErrorMessage = (message) => ({
     type: SET_ERROR_MESSAGE,
     payload: message
+})
+
+const onSetSelectedRepo = (selectedRepo) => ({
+    type: SET_SELECTED_REPO,
+    payload: selectedRepo
 })
 
 const onUpdateUser = () => {
@@ -59,5 +64,22 @@ const onUpdateRepos = () => {
         })
     }
   }
+
+const onUnSelectRepo = () => {
+    return (dispatch) => {
+        dispatch(onSetSelectedRepo(null)) 
+    } 
+}
+
+const onSelectRepo = (id) => {
+    return (dispatch, getState) => {
+      const { repos } = getState();
+
+      const selectedRepo = repos.find(repo => {
+        return repo.id === id
+      })
+      if (selectedRepo) { dispatch(onSetSelectedRepo(selectedRepo))}
+    }
+  }
   
-export { onDismissError, onUpdateUser, onUpdateRepos };
+export { onDismissError, onUpdateUser, onUpdateRepos, onSelectRepo, onUnSelectRepo};

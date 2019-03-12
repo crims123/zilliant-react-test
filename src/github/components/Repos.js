@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { CircularProgress } from 'react-md'
+import { connect } from 'react-redux'
 
 
 import RepoList from './RepoList'
 import RepoDetail from './RepoDetail'
+import { onUpdateRepos, onSelectRepo, onUnSelectRepo} from '../actions/actionsCreators'
 
 class Repos extends Component {
   componentDidMount() {
@@ -36,4 +38,27 @@ class Repos extends Component {
   }
 }
 
-export default connect(Repos)
+const mapStateToProps = ({ lastSuccessfulReposFetch, isFetchingRepos, repos, selectedRepo })=>{
+  return {
+    lastSuccessfulReposFetch,
+    isFetchingRepos,
+    repos,
+    selectedRepo
+  }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    updateRepos() {
+      dispatch(onUpdateRepos())
+    },
+    selectRepo() {
+      dispatch(onSelectRepo())
+    },
+    unselectRepo() {
+      dispatch(onUnSelectRepo())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Repos);

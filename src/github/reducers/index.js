@@ -1,4 +1,4 @@
-import { DISMISS_ERROR, SET_FETCHING_USER_STATE, FETCH_USER_SUCCESSFULLY, SET_ERROR_MESSAGE, SET_FETCHING_REPOS_STATE, FETCH_REPOS_SUCCESSFULLY } from "../actions/types";
+import { DISMISS_ERROR, SET_FETCHING_USER_STATE, FETCH_USER_SUCCESSFULLY, SET_ERROR_MESSAGE, SET_FETCHING_REPOS_STATE, FETCH_REPOS_SUCCESSFULLY, SET_SELECTED_REPO } from "../actions/types";
 
 export default function rootReducer(state, action) {
   switch(action.type) {
@@ -35,6 +35,11 @@ export default function rootReducer(state, action) {
         return {
           ...state,
           errorMsg: action.payload
+        }
+    case SET_SELECTED_REPO:
+        return {
+          ...state,
+          selectedRepo: action.payload
         }
     default: 
     return state;
