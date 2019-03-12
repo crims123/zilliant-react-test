@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { CircularProgress, Snackbar } from 'react-md'
+import { connect } from 'react-redux'
+
 
 import TopBar from './TopBar'
 import Sidebar from './Sidebar'
-import { connect } from '../store'
+import { onDismissError, onUpdateUser } from '../actions/actionsCreators'
 
 class Layout extends Component {
 
@@ -20,6 +22,7 @@ class Layout extends Component {
   render() {
     const { isFetchingUser, children, errorMsg, dismissError } = this.props
     const toasts = errorMsg ? [{ text: errorMsg }] :[]
+    console.log(isFetchingUser)
     return (
       <div>
         {
@@ -43,5 +46,23 @@ class Layout extends Component {
   }
 }
 
+const mapStateToProps = ({ errorMsg, lastSuccessfulUserFetch, isFetchingUser })=>{
+  return {
+    errorMsg,
+    lastSuccessfulUserFetch,
+    isFetchingUser
+  }
+}
 
-export default connect(Layout)
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    dismissError() {
+      dispatch(onDismissError())
+    },
+    updateUser() {
+      dispatch(onUpdateUser())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

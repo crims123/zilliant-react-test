@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { CircularProgress } from 'react-md'
 
-import { connect } from '../store'
+
 import RepoList from './RepoList'
 import RepoDetail from './RepoDetail'
 
